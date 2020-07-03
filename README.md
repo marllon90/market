@@ -18,10 +18,15 @@ $ docker run -p 80:80 my-market-app
 ### Project Structure
 
 models.py --> All SQLAlchemy ORM models
+
 schemas.py --> Marshmallow Swagger schemas
+
 service.py --> CRUD methods for api
+
 db.py --> Interface for session SQLAlchemy
+
 config.py --> Project config
+
 app.py --> main resource and API definitions (it can be forked in single files for Api Resources, but it is a small application)
 
 ### Demo
