@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import (Column, DateTime, Float, ForeignKey, Integer, String,
-                        Text, UniqueConstraint, create_engine)
+                        Text, create_engine)
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -11,6 +11,7 @@ from sqlalchemy.orm import relationship
 import config
 
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -60,6 +61,7 @@ class OrderDetail(Base):
     product = Column(UUID(as_uuid=True), ForeignKey('products.id'), nullable=False)
     quantity = Column(Integer)
     total_price = Column(Float)
+
 
 if __name__ == "__main__":
     engine = create_engine(config.Development.SQLALCHEMY_DATABASE_URI)

@@ -1,5 +1,5 @@
 from flask import Flask, abort, request
-from flask_restplus import Api, Resource, fields
+from flask_restx import Api, Resource, fields
 from sqlalchemy.exc import DataError
 
 from db import session
@@ -59,34 +59,34 @@ class UserResource(Resource):
         """
         Get User by id
         """
-        aps = ApiService()        
+        aps = ApiService()
         return {
             'data': aps.get_by_id(User, UserSchema(), id)
         }
-    
+
     @ns_user.expect(userSwagger)
     def put(self, id):
         """
         Update User by id
         """
         aps = ApiService()
-        payload = request.get_json()  
+        payload = request.get_json()
         return {
             'data': aps.update_data(User, UserSchema(), payload, id)
         }
-    
+
     def delete(self, id):
         """
         Remoce User by id
         """
-        aps = ApiService()        
+        aps = ApiService()
         return {
             'data': aps.delete_data(User, UserSchema(), id)
         }
 
-@ns_user.route('/')    
+@ns_user.route('/')
 class UserListResource(Resource):
-    
+
     @ns_user.expect(userSwagger)
     def post(self):
         """
@@ -99,25 +99,25 @@ class UserListResource(Resource):
         ]
 
         status, response = aps.set_data(User(), UserSchema(), expected_fields, payload)
-        
+
         if status:
             return {
                 "data": response
             }
 
         abort(400, response)
-    
+
     def get(self):
         """
         List all users
         """
-        aps = ApiService()     
+        aps = ApiService()
         return {
             'data': aps.get_all(User, UserSchema())
         }
 
 
-@ns_product.route('/')    
+@ns_product.route('/')
 class ProductListResource(Resource):
     @ns_product.expect(productSwagger)
     def post(self):
@@ -131,7 +131,6 @@ class ProductListResource(Resource):
         ]
 
         status, response = aps.set_data(Product(), ProductSchema(), expected_fields, payload)
-        
         if status:
             return {
                 "data": response

@@ -1,12 +1,13 @@
 from marshmallow import Schema, fields as MarshmallowFields
 
+
 class UserSchema(Schema):
     id = MarshmallowFields.Str()
     name = MarshmallowFields.Str()
     username = MarshmallowFields.Str()
     email = MarshmallowFields.Str()
     city = MarshmallowFields.Str()
-    province =  MarshmallowFields.Str()
+    province = MarshmallowFields.Str()
     country = MarshmallowFields.Str()
     address = MarshmallowFields.Str()
     zip_code = MarshmallowFields.Str()
@@ -26,6 +27,7 @@ class ProductSchema(Schema):
     price = MarshmallowFields.Float()
     image_url = MarshmallowFields.Str()
     description = MarshmallowFields.Str()
+
 
 class OrderDetailSchema(Schema):
     id = MarshmallowFields.Str()

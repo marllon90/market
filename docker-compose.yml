@@ -1,0 +1,31 @@
+version: '3'
+services:
+
+  postgres_db:
+    image: postgres:11.1
+    environment:   # Set up postgres database name and password
+      POSTGRES_PASSWORD: mudar123
+      POSTGRES_DB: demo
+      POSTGRES_USER: root
+    ports:    # Set up ports exposed for other containers to connect to
+      - 5433:5432
+    networks:
+      - app-tier
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+  
+  demo_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres_db
+    networks:
+      - app-tier
+    command: /app/main/server.sh
+    ports:    # Set up ports exposed for other containers to connect to
+      - 80:80
+
+networks:
+  app-tier:
+    driver: bridge
